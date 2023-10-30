@@ -27,6 +27,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lvgl.h"
+#include "lv_port_disp.h"
+#include "lv_port_indev.h"
 #include "lv_demo_stress.h"
 //#include "lv_demo_music.h"
 /* USER CODE END Includes */
