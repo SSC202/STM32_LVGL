@@ -122,7 +122,8 @@ void lv_obj_align(lv_obj_t * obj, lv_align_t align, lv_coord_t x_ofs, lv_coord_t
 
 /**
   * @brief 	参照其他对象对齐（无父子关系），再进行偏移
-  * @param	obj		父对象
+  * @param	obj		对象
+  * @param  base	对齐对象
   * @param	align	对齐方式
   * @param	x_ofs	x轴偏移量
   * @param  y_ofs	y轴偏移量
