@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "lv_examples.h": "c"
+        "lv_examples.h": "c",
+        "stdlib.h": "c",
+        "unistd.h": "c"
     }
 }
