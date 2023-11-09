@@ -50,6 +50,27 @@ static lv_display_t *hal_init(lv_coord_t w, lv_coord_t h);
 /**********************
  *  STATIC PROTOTYPES
  **********************/
+/**
+ * @brief 自定义Switch GUI函数
+ */
+static void My_Demo_Switch_GUI(void)
+{
+  lv_obj_t *switch_1 = lv_switch_create(lv_scr_act());
+  lv_obj_set_size(switch_1, 100, 50);                                            // 设置开关大小
+  lv_obj_set_style_bg_color(switch_1, lv_color_hex(0xffe1d4), LV_STATE_DEFAULT); // 设置开关颜色
+  lv_obj_add_state(switch_1, LV_STATE_CHECKED | LV_STATE_EDITED);                // 默认打开且可修改
+}
+
+/**
+ * @brief 自定义Button GUI函数
+ */
+static void My_Demo_Button_GUI(void)
+{
+  lv_obj_t *button = lv_button_create(lv_scr_act());
+  lv_obj_set_size(button, 100, 50);                                            // 设置按钮大小
+  lv_obj_set_style_bg_color(button, lv_color_hex(0xffe1d4), LV_STATE_DEFAULT); // 设置按钮颜色
+  lv_obj_add_flag(button, LV_OBJ_FLAG_CHECKABLE);                              // 开启状态切换
+}
 
 /**
  * @brief 自定义Label GUI函数
@@ -76,6 +97,8 @@ int main(int argc, char **argv)
   lv_init();
   hal_init(800, 480);
   // My_Demo_Label_GUI();
+  // My_Demo_Button_GUI();
+  My_Demo_Switch_GUI();
 
   while (1)
   {

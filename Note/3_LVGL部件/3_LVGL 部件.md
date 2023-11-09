@@ -2,6 +2,8 @@
 
 ## 1. 标签部件(`lv_label`)
 
+![NULL](picture_1.jpg)
+
 标签部件主要用于文本显示，例如标题，提示信息等。
 
 标签部件由主体`LV_PART_MAIN`，滚动条`LV_PART_SCROLLBAR`，选中文本`LV_PART_SELECTED`组成。
@@ -106,5 +108,97 @@ void lv_obj_set_style_text_color(struct _lv_obj_t * obj, lv_color_t value, lv_st
 > void lv_label_set_long_mode(lv_obj_t * obj, lv_label_long_mode_t long_mode);
 > ```
 >
-> 
+
+## 2. 按钮部件(`lv_btn`)
+
+![NULL](picture_2.jpg)
+
+### 按钮部件的创建
+
+```c
+/**
+  *	@brief	按钮创建函数
+  */
+lv_obj_t * lv_btn_create(lv_obj_t * parent);
+```
+
+### 按钮部件的样式设置
+
+```c
+/**
+  *	@brief	背景颜色设置函数
+  * @param	obj			按钮对象
+  * @param	value		颜色值
+  * @param	selector	选择器，一般为默认触发
+  */
+void lv_obj_set_style_bg_color(struct _lv_obj_t * obj, lv_color_t value, lv_style_selector_t selector);
+
+/**
+  *	@brief	大小设置函数
+  * @param	obj			按钮对象
+  * @param	w			宽度
+  * @param	h			高度
+  */
+void lv_obj_set_size(lv_obj_t * obj, lv_coord_t w, lv_coord_t h);
+```
+
+### 按钮部件的事件设置
+
+```c
+/**
+  *	@brief	标志设置函数
+  * @param	obj			按钮对象
+  * @param	f			事件标志，对于按钮为LV_OBJ_FLAG_CHECKABLE
+  */
+void lv_obj_add_flag(lv_obj_t * obj, lv_obj_flag_t f)
+    
+/**
+  * @brief 	添加事件
+  * @param	obj			父对象
+  * @param	event_cb	事件回调函数
+  * @param	filter		事件类型，通常为LV_EVENT_VALUE_CHANGED
+  * @param  user_data	 进入回调函数的用户数据，通常为NULL
+  */
+struct _lv_event_dsc_t * lv_obj_add_event_cb(lv_obj_t * obj, lv_event_cb_t event_cb, lv_event_code_t filter,void * user_data);
+```
+
+## 3. 开关部件(`lv_switch`)
+
+开关部件常用于控制某个功能的开启和关闭，它可以直接显示被控对象的状态。
+
+![NULL](picture_3.jpg)
+
+开关由主体（`LV_PART_MAIN`），手柄（`LV_PART_KNOB`），指示器（`LV_PART_INDICATOR`）构成。
+
+### 开关部件的创建
+
+```c
+/**
+  *	@brief	开关创建函数
+  */
+lv_obj_t * lv_switch_create(lv_obj_t * parent);
+```
+
+### 开关状态的获取和设置
+
+```c
+/**
+  *	@brief	开关状态设置函数
+  * @param	state	开关状态
+  */
+void lv_obj_add_state(lv_obj_t * obj, lv_state_t state);
+
+/**
+  *	@brief	开关状态清除函数
+  * @param	state	开关状态
+  */
+void lv_obj_clear_state(lv_obj_t * obj, lv_state_t state);
+
+/**
+  *	@brief	开关状态获取函数
+  * @param	state	开关状态
+  * @retval	返回bool类型
+  */
+bool lv_obj_clear_state(lv_obj_t * obj, lv_state_t state);
+```
 
