@@ -202,3 +202,143 @@ void lv_obj_clear_state(lv_obj_t * obj, lv_state_t state);
 bool lv_obj_clear_state(lv_obj_t * obj, lv_state_t state);
 ```
 
+## 4. 复选框部件（`lv_checkbox`）
+
+复选框部件常用于选择某个内容的开启和关闭，可以理解为自带标签的开关。
+
+![NULL](picture_4.jpg)
+
+复选框部件由主体（`LV_PART_MAIN`），勾选框（`LV_PART_INDICATOR`）构成。
+
+### 复选框部件的创建
+
+```c
+/**
+  *	@brief	复选框创建函数
+  */
+lv_obj_t * lv_checkbox_create(lv_obj_t * parent);
+```
+
+### 复选框部件的样式设置
+
+```c
+/**
+  *	@brief	复选框文本设置函数
+  * @param	obj	对象指针
+  * @param	txt	文本
+  */
+void lv_checkbox_set_text(lv_obj_t * obj, const char * txt);
+
+/**
+  *	@brief	复选框和文本间距设置函数
+  * @param	obj			对象指针
+  * @param	value		距离值
+  * @param	selector	选择器，一般为默认触发
+  */
+void lv_obj_set_style_pad_column(struct _lv_obj_t * obj, lv_coord_t value, lv_style_selector_t selector);
+```
+
+### 复选框状态的获取和设置
+
+（略）
+
+## 5. 进度条部件（`lv_bar`）
+
+进度条部件常用于显示当前任务的完成进度。
+
+![NULL](picture_5.jpg)
+
+进度条部件由主体（`LV_PART_MAIN`），指示器（`LV_PART_INDICATOR`）构成。
+
+### 进度条部件的创建
+
+```c
+/**
+  *	@brief	进度条创建函数
+  */
+lv_obj_t * lv_bar_create(lv_obj_t * parent);
+```
+
+### 进度条部件的样式设置
+
+```c
+/**
+  *	@brief	最大最小值设置函数
+  * @param	obj			对象指针
+  * @param	max			最大值
+  * @param	min			最小值
+  */
+void lv_bar_set_range(lv_obj_t * obj, int32_t min, int32_t max);
+
+/**
+  *	@brief	当前值设置函数
+  * @param	obj			对象指针
+  * @param	value		当前值
+  * @param	anim		动画使能状态，通常使用 LV_ANIM_ON
+  */
+void lv_bar_set_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim);
+
+/**
+  *	@brief	动画时间设置函数
+  * @param	obj			对象指针
+  * @param	value		当前值
+  * @param	selector	选择器，一般为默认触发
+  */
+void lv_obj_set_style_anim_time(struct _lv_obj_t * obj, uint32_t value, lv_style_selector_t selector);
+
+// 模式设置
+enum {
+    LV_BAR_MODE_NORMAL,				/* 默认模式 */
+    LV_BAR_MODE_SYMMETRICAL,		/* 从零值绘制到当前值（当前值可以小于0） */
+    LV_BAR_MODE_RANGE				/* 允许设置起始值，但起始值必须小于当前值 */
+};
+
+/**
+  *	@brief	模式设置函数
+  * @param	obj			对象指针
+  * @param	mode		模式
+  */
+void lv_bar_set_mode(lv_obj_t * obj, lv_bar_mode_t mode);
+```
+
+> - 当进度条高度大于宽度时，其方向变为垂直。
+> - 动画时间设置需要放在当前值设置之前 ，否则看不到动画效果。
+> - 动画时间指的是旧值刷新到新值的绘图时间，并不是现实中当前值变化所需的时间。
+
+## 6. 加载器部件（`lv_spinner`）
+
+加载器部件常用于提示当前任务正在加载。
+
+![NULL](picture_6.jpg)
+
+加载器部件由主体（`LV_PART_MAIN`），指示器（`LV_PART_INDICATOR`），手柄（`LV_PART_KNOB`）构成。
+
+### 加载器部件的创建
+
+```c
+/**
+  *	@brief	加载器创建函数
+  */
+lv_obj_t * lv_spinner_create(lv_obj_t * parent);
+```
+
+### 加载器部件的样式设置
+
+```c
+/**
+  *	@brief	圆弧颜色设置函数
+  * @param	obj			对象指针
+  * @param	value		颜色值
+  * @param	selector	选择器
+  */
+void lv_obj_set_style_arc_color(struct _lv_obj_t * obj, lv_color_t value, lv_style_selector_t selector);
+
+/**
+  *	@brief	圆弧宽度设置函数
+  * @param	obj			对象指针
+  * @param	value		宽度值
+  * @param	selector	选择器
+  */
+void lv_obj_set_style_arc_width(struct _lv_obj_t * obj, lv_coord_t value, lv_style_selector_t selector);
+```
+
