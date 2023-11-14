@@ -117,6 +117,77 @@ static void My_Demo_Spinner_GUI(void)
   lv_obj_set_style_arc_width(spinner, 30, LV_PART_MAIN);                          // 设置主体圆弧宽度
   lv_obj_set_style_arc_width(spinner, 30, LV_PART_INDICATOR);                     // 设置指示器圆弧宽度
 }
+
+/**
+ * @brief 自定义LED GUI函数
+ */
+static void My_Demo_Led_GUI(void)
+{
+  lv_obj_t *led = lv_led_create(lv_scr_act());
+  lv_led_set_color(led, lv_color_hex(0xff0000)); // 设置LED颜色
+  lv_led_set_brightness(led, 0);                 // 设置LED亮度
+  lv_led_toggle(led);                            // 翻转LED
+}
+
+/**
+ * @brief 自定义List GUI函数
+ */
+static void My_Demo_List_GUI(void)
+{
+  lv_obj_t *list = lv_list_create(lv_scr_act());
+  lv_list_add_text(list, "Settings");          // 设置列表文本
+  lv_list_add_btn(list, LV_SYMBOL_GPS, "GPS"); // 设置列表按键图标和文本
+  lv_list_add_btn(list, LV_SYMBOL_WIFI, "WIFI");
+}
+
+/**
+ * @brief 自定义Dropdown GUI函数
+ */
+static void My_Demo_Dropdown_GUI(void)
+{
+  lv_obj_t *dropdown = lv_dropdown_create(lv_scr_act());
+  lv_dropdown_set_options(dropdown, "a\nb\nc\nd\n");
+}
+
+/**
+ * @brief 自定义Roller GUI函数
+ */
+static void My_Demo_Roller_GUI(void)
+{
+  lv_obj_t *roller = lv_roller_create(lv_scr_act());
+  lv_obj_set_style_text_line_space(roller, 30, LV_STATE_DEFAULT);     // 设置选项间隔
+  lv_roller_set_options(roller, "a\nb\nc\nd", LV_ROLLER_MODE_NORMAL); // 设置选项内容和显示模式
+  lv_roller_set_visible_row_count(roller, 2);                         // 设置可见行数
+}
+
+/**
+ * @brief 自定义Slider GUI函数
+ */
+static void My_Demo_Slider_GUI(void)
+{
+  lv_obj_t *slider = lv_slider_create(lv_scr_act());
+  lv_obj_set_size(slider, 20, 200);
+  lv_slider_set_value(slider, 50, LV_ANIM_OFF);      // 设置当前值
+  lv_slider_set_range(slider, -100, 100);            // 设置范围值
+  lv_slider_set_mode(slider, LV_SLIDER_MODE_NORMAL); // 设置模式
+  lv_slider_set_left_value(slider, 20, LV_ANIM_OFF); // 设置左值
+}
+
+/**
+ * @brief 自定义Arc GUI函数
+ */
+static void My_Demo_Arc_GUI(void)
+{
+  lv_obj_t *arc = lv_arc_create(lv_scr_act());
+  lv_obj_set_pos(arc, 100, 100);
+  lv_arc_set_value(arc, 10);                // 设置当前值
+  lv_arc_set_range(arc, 0, 200);            // 设置范围值
+  lv_arc_set_angles(arc, 135, 45);          // 设置前景弧角度
+  lv_arc_set_bg_angles(arc, 135, 45);       // 设置背景弧角度
+  lv_arc_set_rotation(arc, 0);              // 旋转角度设置
+  lv_arc_set_mode(arc, LV_ARC_MODE_NORMAL); // 设置模式
+  lv_arc_set_change_rate(arc, 90);          // 速率设置
+}
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
@@ -133,7 +204,13 @@ int main(int argc, char **argv)
   // My_Demo_Button_GUI();
   // My_Demo_CheckBox_GUI();
   // My_Demo_Bar_GUI();
-  My_Demo_Spinner_GUI();
+  // My_Demo_Spinner_GUI();
+  // My_Demo_Led_GUI();
+  // My_Demo_List_GUI();
+  // My_Demo_Dropdown_GUI();
+  // My_Demo_Roller_GUI();
+  // My_Demo_Slider_GUI();
+  My_Demo_Arc_GUI();
 
   while (1)
   {

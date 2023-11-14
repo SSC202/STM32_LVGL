@@ -342,3 +342,314 @@ void lv_obj_set_style_arc_color(struct _lv_obj_t * obj, lv_color_t value, lv_sty
 void lv_obj_set_style_arc_width(struct _lv_obj_t * obj, lv_coord_t value, lv_style_selector_t selector);
 ```
 
+## 7. LED 部件（`lv_led`）
+
+LED部件常用于指示控制对象的状态。
+
+![NULL](picture_7.jpg)
+
+### LED 部件的创建
+
+```c
+/**
+  *	@brief	LED创建函数
+  */
+lv_obj_t * lv_led_create(lv_obj_t * parent);
+```
+
+### LED 部件的样式设置
+
+```c
+/**
+  *	@brief	LED颜色设置函数
+  * @param	obj			对象指针
+  * @param	color		颜色值
+  */
+void lv_led_set_color(lv_obj_t * obj, lv_color_t color);
+
+/**
+  *	@brief	LED亮度设置函数
+  * @param	obj			对象指针
+  * @param	bright		LED亮度
+  */
+void lv_led_set_brightness(lv_obj_t * obj, uint8_t bright);
+
+/**
+  *	@brief	LED状态设置函数
+  * @param	obj			对象指针
+  */
+void lv_led_toggle(lv_obj_t * obj);
+void lv_led_on(lv_obj_t * led);
+void lv_led_off(lv_obj_t * led);
+```
+
+## 8. 列表部件（`lv_List`）
+
+列表部件常用于多选一的场景，默认会展现多个选项。
+
+![NULL](picture_8.jpg)
+
+列表部件由主体（`LV_PART_MAIN`），滚动条（`LV_PART_SCROLLBAR`）构成。
+
+### 列表部件的创建
+
+```c
+/**
+  *	@brief	列表创建函数
+  */
+lv_obj_t * lv_list_create(lv_obj_t * parent);
+```
+
+### 列表部件的样式设置
+
+```c
+/**
+  *	@brief	列表文本设置函数
+  * @param	obj	对象指针
+  * @param	txt	文本
+  */
+lv_obj_t * lv_list_add_text(lv_obj_t * list, const char * txt);
+
+/**
+  *	@brief	列表按键设置函数
+  * @param	obj		对象指针
+  * @param	icon	按键图标
+  * @param	txt		按键文本
+  */
+lv_obj_t * lv_list_add_button(lv_obj_t * list, const void * icon, const char * txt);
+```
+
+## 9. 下拉列表部件（`lv_dropdown`）
+
+下拉列表部件常用于多选一的场景，点击后可展现多个选项。
+
+![NULL](picture_9.jpg)
+
+下拉列表部件由按钮和列表构成。
+
+### 下拉列表部件的创建
+
+```c
+/**
+  *	@brief	下拉列表创建函数
+  */
+lv_obj_t * lv_dropdown_create(lv_obj_t * parent);
+```
+
+### 下拉列表部件的样式设置
+
+```c
+/**
+  *	@brief	下拉列表选项设置函数
+  * @param	obj		对象指针
+  * @param	options	列表选项 可以使用 "选项1\n选项2\n" 的字符串。
+  */
+void lv_dropdown_set_options(lv_obj_t * obj, const char * options);
+
+/**
+  *	@brief	下拉列表设置当前选项函数
+  * @param	obj		对象指针
+  * @param	sel_opt	选项索引，从0开始。
+  */
+void lv_dropdown_set_selected(lv_obj_t * obj, uint32_t sel_opt);
+
+/**
+  *	@brief	下拉列表设置显示方向函数
+  * @param	obj		对象指针
+  * @param	dir		方向，LV_DIR_...的宏
+  */
+void lv_dropdown_set_dir(lv_obj_t * obj, lv_dir_t dir);
+
+/**
+  *	@brief	下拉列表设置标识函数
+  * @param	obj		对象指针
+  * @param	symbol	标识
+  */
+void lv_dropdown_set_symbol(lv_obj_t * obj, const void * symbol);
+```
+
+## 10. 滚轮部件（`lv_roller`）
+
+滚轮部件常用于多选一的场景，它以滚轮的形式来展现多个选项。
+
+![NULL](picture_10.jpg)
+
+列表部件由主体（`LV_PART_MAIN`），选项框（`LV_PART_SELECTED`）构成。
+
+### 滚轮部件的创建
+
+```c
+/**
+  *	@brief	滚轮部件创建函数
+  */
+lv_obj_t * lv_roller_create(lv_obj_t * parent);
+```
+
+### 滚轮部件的样式设置
+
+```c
+/**
+  *	@brief	选项间隔设置函数
+  * @param	obj			对象指针
+  * @param	value		间隔值
+  * @param	selector	选择器
+  */
+void lv_obj_set_style_text_line_space(struct _lv_obj_t * obj, lv_coord_t value, lv_style_selector_t selector);
+
+/**
+  *	@brief	选项内容和滚动模式设置函数
+  * @param	obj			对象指针
+  * @param	options		选项 可以使用 "选项1\n选项2\n" 的字符串。
+  * @param	mode 		模式，LV_ROLLER_MODE_NORMAL 或者 LV_ROLLER_MODE_INFINITE
+  */
+void lv_roller_set_options(lv_obj_t * obj, const char * options, lv_roller_mode_t mode);
+
+/**
+  *	@brief	选项可见行数设置函数
+  * @param	obj			对象指针
+  * @param	row_cnt		可见行数值
+  */
+void lv_roller_set_visible_row_count(lv_obj_t * obj, uint32_t row_cnt);
+```
+
+## 11. 滑块部件（`lv_slider`）
+
+滑块部件常用于调节某个参数的值，它以直线滑动的形式来修改数值。
+
+![NULL](picture_11.jpg)
+
+滑块部件由主体（`LV_PART_MAIN`），指示器（`LV_PART_INDICATOR`），旋钮（`LV_PART_KNOB`）构成。
+
+### 滑块部件的创建
+
+```c
+/**
+  *	@brief	滑块部件创建函数
+  */
+lv_obj_t * lv_slider_create(lv_obj_t * parent);
+```
+
+### 滑块状态的获取和设置
+
+![NULL](picture_12.jpg)
+
+```c
+/**
+  *	@brief	最大最小值设置函数
+  * @param	obj			对象指针
+  * @param	max			最大值
+  * @param	min			最小值
+  */
+static inline void lv_slider_set_range(lv_obj_t * obj, int32_t min, int32_t max);
+
+/**
+  *	@brief	当前值设置函数
+  * @param	obj			对象指针
+  * @param	value		当前值
+  * @param	anim		动画使能状态，通常使用 LV_ANIM_ON
+  */
+static inline void lv_slider_set_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim);
+
+/**
+  *	@brief	当前值获取函数
+  * @param	obj			对象指针
+  */
+static inline int32_t lv_slider_get_value(lv_obj_t * obj);
+
+/**
+  *	@brief	模式设置函数
+  * @param	obj			对象指针
+  * @param	mode		模式，LV_SLIDER_MODE...宏
+  */
+static inline void lv_slider_set_mode(lv_obj_t * obj, lv_bar_mode_t mode);
+
+/**
+  *	@brief	左值设置函数
+  * @param	obj			对象指针
+  * @param	value		左值
+  * @param	anim		动画使能状态，通常使用 LV_ANIM_ON
+  */
+static inline void lv_slider_set_left_value(lv_obj_t * obj, int32_t value, lv_anim_enable_t anim);
+```
+
+## 12. 圆弧部件（`lv_arc`）
+
+圆弧部件以弧形滑动的形式来调节、显示某个参数的值。
+
+![NULL](picture_13.jpg)
+
+滑块部件由背景弧（`LV_PART_MAIN`），前景弧（`LV_PART_INDICATOR`），旋钮（`LV_PART_KNOB`）构成。
+
+### 圆弧部件的创建
+
+```c
+/**
+  *	@brief	滑块部件创建函数
+  */
+lv_obj_t * lv_arc_create(lv_obj_t * parent);
+```
+
+### 圆弧状态的获取和设置
+
+![NULL](picture_14.jpg)
+
+```c
+/**
+  *	@brief	最大最小值设置函数
+  * @param	obj			对象指针
+  * @param	max			最大值
+  * @param	min			最小值
+  */
+void lv_arc_set_range(lv_obj_t * obj, int32_t min, int32_t max);
+
+/**
+  *	@brief	当前值设置函数
+  * @param	obj			对象指针
+  * @param	value		当前值
+  */
+void lv_arc_set_value(lv_obj_t * obj, int32_t value)
+
+/**
+  *	@brief	当前值获取函数
+  * @param	obj			对象指针
+  */
+int32_t lv_arc_get_value(const lv_obj_t * obj)
+
+/**
+  *	@brief	模式设置函数
+  * @param	obj			对象指针
+  * @param	mode		模式，LV_ARC_MODE...宏
+  */
+void lv_arc_set_mode(lv_obj_t * obj, lv_arc_mode_t type);
+
+/**
+  *	@brief	绘制速率设置函数
+  * @param	obj			对象指针
+  * @param	rate		绘制速率
+  */
+void lv_arc_set_change_rate(lv_obj_t * obj, uint32_t rate)
+    
+/**
+  *	@brief	前景弧角度设置函数
+  * @param	obj			对象指针
+  * @param	start		开始值
+  * @param	end			结束值
+  */
+void lv_arc_set_angles(lv_obj_t * obj, uint32_t start, uint32_t end);
+
+/**
+  *	@brief	背景弧角度设置函数
+  * @param	obj			对象指针
+  * @param	start		开始值
+  * @param	end			结束值
+  */
+void lv_arc_set_bg_angles(lv_obj_t * obj, uint32_t start, uint32_t end);
+
+/**
+  *	@brief	旋转角度设置函数
+  * @param	obj			对象指针
+  * @param	rotation	旋转角度
+  */
+void lv_arc_set_rotation(lv_obj_t * obj, uint32_t rotation);
+```
+
