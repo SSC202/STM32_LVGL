@@ -188,6 +188,180 @@ static void My_Demo_Arc_GUI(void)
   lv_arc_set_mode(arc, LV_ARC_MODE_NORMAL); // 设置模式
   lv_arc_set_change_rate(arc, 90);          // 速率设置
 }
+
+/**
+ * @brief 自定义Line GUI函数
+ */
+static void My_Demo_Line_GUI(void)
+{
+  lv_obj_t *line = lv_line_create(lv_scr_act());
+  static lv_point_t line_points[] = {{150, 50}, {250, 200}, {50, 200}, {150, 50}};
+  lv_line_set_points(line, line_points, 4);
+  lv_obj_set_style_line_width(line, 8, LV_PART_MAIN);      // 设置线宽
+  lv_obj_set_style_line_rounded(line, true, LV_PART_MAIN); // 设置圆角
+  lv_line_set_y_invert(line, true);                        // Y轴反转
+}
+
+/**
+ * @brief 自定义Img GUI函数
+ */
+static void My_Demo_Img_GUI(void)
+{
+  lv_obj_t *img = lv_img_create(lv_scr_act());
+  LV_IMG_DECLARE(img_qq);
+  lv_img_set_src(img, &img_qq);
+  lv_img_set_offset_x(img, 100); // x轴偏移100
+  lv_img_set_offset_y(img, 20);  // y轴偏移20
+  lv_obj_set_style_image_recolor(img, lv_color_hex(0xffe1d2), LV_PART_MAIN);
+  lv_obj_set_style_image_recolor_opa(img, 150, LV_PART_MAIN);
+  lv_img_set_zoom(img, 512);  // 放大2倍
+  lv_img_set_angle(img, 900); // 顺时针方向旋转90°
+  // lv_obj_update_layout(img);   // 更新图片布局信息
+  lv_img_set_pivot(img, 200, 200); // 设置中心点
+}
+
+/**
+ * @brief 自定义ColorWheel GUI函数
+ */
+static void My_Demo_ColorWheel_GUI(void)
+{
+}
+
+/**
+ * @brief 自定义Btnmatrix GUI函数
+ */
+static void My_Demo_Btnmatrix_GUI(void)
+{
+  lv_obj_t *btnm = lv_btnmatrix_create(lv_scr_act());
+  static const char *map[] = {"btn1", "\n", "btn2", "btn3", ""};   // 定义按钮数组，最后一个元素必须为空
+  lv_btnmatrix_set_map(btnm, map);                                 // 设置按钮
+  lv_btnmatrix_set_btn_width(btnm, 0, 5);                          // 设置按钮相对宽度
+  lv_btnmatrix_set_btn_ctrl(btnm, 0, LV_BTNMATRIX_CTRL_CHECKABLE); // 设置单个按钮属性
+  // lv_btnmatrix_clear_btn_ctrl(btnm, 0, LV_BTNMATRIX_CTRL_CHECKABLE); // 清除单个按钮属性
+  lv_btnmatrix_set_btn_ctrl_all(btnm, LV_BTNMATRIX_CTRL_CHECKABLE); // 设置所有按钮属性
+  lv_btnmatrix_set_one_checked(btnm, true);
+}
+
+/**
+ * @brief 自定义Areatext GUI函数
+ */
+static void My_Demo_TextArea_GUI(void)
+{
+  lv_obj_t *ta = lv_textarea_create(lv_scr_act());
+  lv_textarea_add_char(ta, 'A');                         // 添加一个字符到当前光标处
+  lv_obj_t *keyboard = lv_keyboard_create(lv_scr_act()); // 创建键盘部件
+  lv_keyboard_set_textarea(keyboard, ta);                // 关联键盘和文本区域部件
+  // lv_textarea_set_cursor_pos(ta, 0);                  // 0：最左侧， LV_TEXTAREA_CURSOR_LAST：最右侧
+  lv_textarea_set_one_line(ta, true);          // 单行模式
+  lv_textarea_set_password_mode(ta, true);     // 密码模式（隐藏输入的内容）
+  lv_textarea_set_password_show_time(ta, 100); // 密码显示时间
+  // lv_textarea_set_accepted_chars(ta, "0123456789"); // 限制接收的字符
+  lv_textarea_set_max_length(ta, 6);                // 限制字符长度
+  lv_textarea_set_placeholder_text(ta, "password"); // 提示输入密码
+  // const char *txt = lv_textarea_get_text(ta);       // 获取文本框文本
+}
+
+/**
+ * @brief 自定义Keyboard GUI函数
+ */
+static void My_Demo_Keyboard_GUI(void)
+{
+  lv_obj_t *kb = lv_keyboard_create(lv_scr_act());
+  lv_obj_t *ta = lv_textarea_create(lv_scr_act());
+  lv_keyboard_set_textarea(kb, ta);                  // 关联键盘和文本区域部件
+  lv_keyboard_set_popovers(kb, true);                // 允许按键弹窗提示
+  lv_keyboard_set_mode(kb, LV_KEYBOARD_MODE_NUMBER); // 数字键盘模式
+}
+
+/**
+ * @brief 自定义Imgbtn GUI函数
+ */
+static void My_Demo_Imgbtn_GUI(void)
+{
+  lv_obj_t *imgbtn = lv_imgbtn_create(lv_scr_act());
+  LV_IMG_DECLARE(img_qq);
+  lv_imgbtn_set_src(imgbtn, LV_IMGBTN_STATE_RELEASED, NULL, &img_qq, NULL);
+  lv_obj_set_size(imgbtn, 36, 44);
+  lv_obj_set_pos(imgbtn, 200, 200);
+}
+
+/**
+ * @brief 自定义Tabview GUI函数
+ */
+static void My_Demo_Tabview_GUI(void)
+{
+  lv_obj_t *tv = lv_tabview_create(lv_scr_act(), LV_DIR_TOP, 50);
+  lv_obj_t *tab1 = lv_tabview_add_tab(tv, "Tab 1");
+  lv_obj_t *tab2 = lv_tabview_add_tab(tv, "Tab 2");
+  lv_tabview_set_act(tv, 0, LV_ANIM_ON);
+  lv_obj_t *label = lv_label_create(tab1);
+  lv_label_set_text(label, "Test");
+}
+
+/**
+ * @brief 自定义Tabview GUI函数
+ */
+static void My_Demo_Tileview_GUI(void)
+{
+  lv_obj_t *tileview = lv_tileview_create(lv_scr_act());
+  lv_obj_t *tile1 = lv_tileview_add_tile(tileview, 0, 0, LV_DIR_RIGHT);
+  lv_obj_t *tile2 = lv_tileview_add_tile(tileview, 1, 0, LV_DIR_LEFT);
+  lv_obj_update_layout(tileview);                // 更新参数
+  lv_obj_set_tile(tileview, tile2, LV_ANIM_OFF); // 根据页面对象设置
+  // lv_obj_set_tile_id(tileview, 1, 0, LV_ANIM_OFF); // 根据页面行列设置
+}
+
+/**
+ * @brief 自定义Win GUI函数
+ */
+static void My_Demo_Win_GUI(void)
+{
+  lv_obj_t *win = lv_win_create(lv_scr_act());
+  lv_obj_t *title = lv_win_add_title(win, "Setting");
+  lv_obj_t *btn = lv_win_add_button(win, LV_SYMBOL_BELL, 20);
+  lv_obj_t *content = lv_win_get_content(win); // 获取主体
+  lv_obj_t *label = lv_label_create(content);  // 添加内容
+  lv_label_set_text(label, "Test");
+}
+
+/**
+ * @brief 自定义Msgbox GUI函数
+ */
+static void My_Demo_Msgbox_GUI(void)
+{
+  static const char *btns[] = {"Continue", "Close", ""};
+  lv_obj_t *msgbox = lv_msgbox_create(lv_scr_act(), "Notice", "Do you want to continue?", btns, true);
+  // lv_msgbox_close(msgbox);
+}
+
+/**
+ * @brief 自定义Spinbox GUI函数
+ */
+static void My_Demo_Spinbox_GUI(void)
+{
+  lv_obj_t *spinbox = lv_spinbox_create(lv_scr_act());
+  // lv_spinbox_increment(spinbox);              // 递增
+  // lv_spinbox_decrement(spinbox);              // 递减
+  lv_spinbox_set_step(spinbox, 200);          // 设置步进值，默认为1
+  lv_spinbox_set_range(spinbox, -1000, 1000); // 设置范围值，默认±99999
+  lv_spinbox_set_value(spinbox, 400);
+  lv_spinbox_set_digit_format(spinbox, 4, 2); // 设置数字位数、小数点位置
+  lv_spinbox_set_pos(spinbox, 3);
+  lv_spinbox_get_value(spinbox); // 返回值为整数，而非小数
+}
+
+/**
+ * @brief 自定义Table GUI函数
+ */
+static void My_Demo_Table_GUI(void)
+{
+  lv_obj_t *table = lv_table_create(lv_scr_act());
+  lv_table_set_row_cnt(table, 2);        // 设置行数
+  lv_table_set_col_cnt(table, 2);        // 设置列数
+  lv_table_set_col_width(table, 1, 200); // 设置列的宽度
+  lv_table_set_cell_value(table, 0, 0, "123");
+  lv_table_set_cell_value_fmt(table, 1, 0, "%d", 100);
+}
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
@@ -210,7 +384,19 @@ int main(int argc, char **argv)
   // My_Demo_Dropdown_GUI();
   // My_Demo_Roller_GUI();
   // My_Demo_Slider_GUI();
-  My_Demo_Arc_GUI();
+  // My_Demo_Arc_GUI();
+  // My_Demo_Line_GUI();
+  // My_Demo_Img_GUI();
+  // My_Demo_Btnmatrix_GUI();
+  // My_Demo_TextArea_GUI();
+  // My_Demo_Keyboard_GUI();
+  // My_Demo_Imgbtn_GUI();
+  // My_Demo_Tabview_GUI();
+  // My_Demo_Tileview_GUI();
+  // My_Demo_Win_GUI();
+  // My_Demo_Msgbox_GUI();
+  // My_Demo_Spinbox_GUI();
+  My_Demo_Table_GUI();
 
   while (1)
   {

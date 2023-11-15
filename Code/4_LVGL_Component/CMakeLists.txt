@@ -15,7 +15,7 @@ SET(CMAKE_CXX_FLAGS "-O3")
 # include_directories(${SDL2_INCLUDE_DIRS})
 
 add_subdirectory(lvgl)
-add_executable(main main.c mouse_cursor_icon.c ${SOURCES} ${INCLUDES})
+add_executable(main main.c mouse_cursor_icon.c img_qq.c ${SOURCES} ${INCLUDES})
 
 target_link_libraries(main lvgl lvgl::examples lvgl::demos ${SDL2_LIBRARIES})
 target_link_libraries(main mingw32) 

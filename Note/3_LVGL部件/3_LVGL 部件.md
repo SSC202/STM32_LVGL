@@ -584,7 +584,7 @@ static inline void lv_slider_set_left_value(lv_obj_t * obj, int32_t value, lv_an
 
 ```c
 /**
-  *	@brief	滑块部件创建函数
+  *	@brief	圆弧部件创建函数
   */
 lv_obj_t * lv_arc_create(lv_obj_t * parent);
 ```
@@ -651,5 +651,636 @@ void lv_arc_set_bg_angles(lv_obj_t * obj, uint32_t start, uint32_t end);
   * @param	rotation	旋转角度
   */
 void lv_arc_set_rotation(lv_obj_t * obj, uint32_t rotation);
+```
+
+## 13. 线条部件（`lv_line`）
+
+线条部件能够在一组坐标点之间依次绘制直线。
+
+### 线条部件的创建
+
+```c
+/**
+  *	@brief	线条部件创建函数
+  */
+lv_obj_t * lv_line_create(lv_obj_t * parent);
+```
+
+### 线条部件的样式设置
+
+```c
+// 线条坐标点设置
+static lv_point_t line_points[] = {{15, 5}, {25, 20}, {5, 20}, {15, 5}};
+
+/**
+  *	@brief	线条设置函数
+  * @param	obj			对象指针
+  * @param	points		坐标点数组
+  * @param	point_num	坐标点数量
+  */
+void lv_line_set_points(lv_obj_t * obj, const lv_point_t points[], uint32_t point_num);
+
+/**
+  *	@brief 	线宽设置函数
+  * @param	obj			对象指针
+  * @param	value		线宽值
+  * @param	selector	选择器
+  */
+void lv_obj_set_style_line_width(struct _lv_obj_t * obj, lv_coord_t value, lv_style_selector_t selector);
+
+/**
+  *	@brief 	圆角设置函数
+  * @param	obj			对象指针
+  * @param	value		是否设置圆角
+  * @param	selector	选择器
+  */
+void lv_obj_set_style_line_rounded(struct _lv_obj_t * obj, bool value, lv_style_selector_t selector)
+    
+/**
+  *	@brief 	Y轴反转设置函数
+  * @param	obj			对象指针
+  * @param	en			是否翻转
+  */
+void lv_line_set_y_invert(lv_obj_t * obj, bool en);
+```
+
+![NULL](picture_15.jpg)
+
+## 14. 图片部件（`lv_img`）
+
+图片部件可用于图片显示、功能界面优化、背景优化等。
+
+![NULL](picture_16.jpg)
+
+### 图片部件的创建
+
+```c
+/**
+  *	@brief	图片部件创建函数
+  */
+lv_obj_t * lv_img_create(lv_obj_t * parent);
+```
+
+1. 图像的导入
+
+[LVGL 图像转换器](https://lvgl.io/tools/imageconverter)
+
+> - 一般使用默认选项；
+> - 生成代码后，将`LV_COLOR_SIZE`转换为`LV_COLOR_DEPTH`。将`LV_IMG_CF_TRUE_COLOR`改为`LV_COLOR_FORMAT_RGB565`;
+
+2. 图像的声明
+
+在C文件中使用以下代码链接`img`：
+
+```c
+LV_IMG_DECLARE(img_qq);
+lv_img_set_src(img, &img_qq);
+```
+
+### 图像部件的样式设置
+
+```c
+/**
+  *	@brief 	设置 X,Y 轴偏移
+  * @param	obj			对象指针
+  * @param	x/y			偏移量
+  */
+void lv_image_set_offset_x(lv_obj_t * obj, lv_coord_t x);
+void lv_image_set_offset_y(lv_obj_t * obj, lv_coord_t y);
+
+/**
+  *	@brief 	图片重新着色
+  * @param	obj			对象指针
+  * @param	value		颜色值/透明度
+  * @param	selector	选择器		
+  */
+void lv_obj_set_style_image_recolor(struct _lv_obj_t * obj, lv_color_t value, lv_style_selector_t selector);
+void lv_obj_set_style_image_recolor_opa(struct _lv_obj_t * obj, lv_opa_t value, lv_style_selector_t selector);
+
+/**
+  *	@brief 	图片尺寸设置
+  * @param	obj			对象指针
+  * @param	zoom		尺寸
+  */
+void lv_image_set_scale(lv_obj_t * obj, uint32_t zoom);
+
+/**
+  *	@brief 	图片旋转
+  * @param	obj			对象指针
+  * @param	angle		角度（输入值应为10倍）
+  */
+void lv_image_set_rotation(lv_obj_t * obj, int32_t angle);
+
+/**
+  *	@brief 	图片中心点设置
+  * @param	obj			对象指针
+  * @param	x/y			图片中心点
+  */
+void lv_image_set_pivot(lv_obj_t * obj, lv_coord_t x, lv_coord_t y);
+```
+
+## 15. 色环部件（`lv_colorwheel`）（本版本中无色环部件）
+
+在UI设计中，色环部件一般用作颜色选择器。
+
+![NULL](picture_17.jpg)
+
+色环部件由主体（`LV_PART_MAIN`），旋钮（`LV_PART_KNOB`）构成。
+
+### 色环部件的创建
+
+```c
+/**
+  *	@brief	色环部件创建函数
+  */
+lv_obj_t * lv_colorwheel_create(lv_obj_t * parent);
+```
+
+## 16. 按钮矩阵部件（`lv_btnmatrix`）
+
+按钮矩阵部件可以在不同的行和列中显示多个轻量级按钮。
+
+![NULL](picture_18.jpg)
+
+按钮矩阵部件由主体（`LV_PART_MAIN`），按钮（`LV_PART_ITEMS`）构成。
+
+### 按钮矩阵部件的创建
+
+```c
+/**
+  *	@brief	按钮矩阵部件创建函数
+  */
+lv_obj_t * lv_btnmatrix_create(lv_obj_t * parent);
+
+// 按钮数组的创建，最后一个元素为空
+static const char *map[] = {"btn1", "\n", "btn2", "btn3", ""};
+
+/**
+  *	@brief	按钮矩阵文本数量设置函数
+  * @param	map		按钮数组
+  */
+void lv_buttonmatrix_set_map(lv_obj_t * obj, const char * map[]);
+```
+
+### 按钮矩阵部件的样式设置
+
+```c
+/**
+  *	@brief 	按钮矩阵的间距设置
+  * @param	obj			对象指针
+  * @param	btn_id		按钮索引
+  * @param	width		相对宽度
+  */
+void lv_buttonmatrix_set_button_width(lv_obj_t * obj, uint32_t btn_id, uint32_t width);
+
+/**
+  *	@brief 	单个按钮属性设置
+  * @param	obj			对象指针
+  * @param	btn_id		按钮索引
+  * @param	ctrl		按钮属性
+  */
+void lv_buttonmatrix_set_button_ctrl(lv_obj_t * obj, uint32_t btn_id, lv_buttonmatrix_ctrl_t ctrl);
+void lv_buttonmatrix_set_button_ctrl_all(lv_obj_t * obj, lv_buttonmatrix_ctrl_t ctrl);
+
+/**
+  *	@brief 	单次选中属性设置
+  * @param	obj			对象指针
+  * @param	en			状态属性
+  */
+void lv_buttonmatrix_set_one_checked(lv_obj_t * obj, bool en);
+```
+
+## 17. 文本区域部件（`lv_textarea`）
+
+文本区域部件即文本输入框，用户可以在其中输入文本内容。
+
+![NULL](picture_19.jpg)
+
+文本区域部件由主体（`LV_PART_MAIN`），滚动条（`LV_PART_SCROLLBAR`），所选文本（`LV_PART_SELECTED`），光标（`LV_PART_CURSOR`），占位符（`TEXTAREA_PLACEHOLDER`）构成。
+
+### 文本区域部件的创建
+
+```c
+/**
+  *	@brief	文本区域部件创建函数
+  */
+lv_obj_t * lv_textarea_create(lv_obj_t * parent);
+```
+
+### 文本区域部件的样式设置
+
+```c
+/**
+  *	@brief 	文本添加函数
+  * @param	obj			对象指针
+  * @param	c			添加文本
+  */
+void lv_textarea_add_char(lv_obj_t * obj, uint32_t c);
+
+/**
+  *	@brief 	光标位置设置函数
+  * @param	obj			对象指针
+  * @param	pos			0：最左侧， LV_TEXTAREA_CURSOR_LAST：最右侧
+  */
+void lv_textarea_set_cursor_pos(lv_obj_t * obj, int32_t pos);
+
+/**
+  *	@brief 	单行模式设置函数
+  * @param	obj			对象指针
+  * @param	en			使能单行模式
+  */
+void lv_textarea_set_one_line(lv_obj_t * obj, bool en);
+
+/**
+  *	@brief 	密码模式设置函数
+  * @param	obj			对象指针
+  * @param	en			使能密码模式
+  */
+void lv_textarea_set_password_mode(lv_obj_t * obj, bool en);
+
+/**
+  *	@brief 	密码模式设置时间函数
+  * @param	obj			对象指针
+  * @param	time		密码显示时间
+  */
+void lv_textarea_set_password_show_time(lv_obj_t * obj, uint32_t time);
+
+/**
+  *	@brief 	限制接收字符
+  * @param	obj			对象指针
+  * @param	list		限制接收的字符
+  */
+void lv_textarea_set_accepted_chars(lv_obj_t * obj, const char * list);
+
+/**
+  *	@brief 	限制最大输入长度
+  * @param	obj			对象指针
+  * @param	num			最大输入长度
+  */
+void lv_textarea_set_max_length(lv_obj_t * obj, uint32_t num);
+
+/**
+  *	@brief 	占位符设置长度
+  * @param	obj			对象指针
+  * @param	txt			占位符文本
+  */
+void lv_textarea_set_placeholder_text(lv_obj_t * obj, const char * txt);
+
+/**
+  *	@brief 	文本获取函数
+  * @param	obj			对象指针
+  */
+const char * lv_textarea_get_text(const lv_obj_t * obj);
+```
+
+## 18. 键盘部件（`lv_keyboard`）
+
+键盘部件可用于输入文本内容，其本质上就是一个特殊的按钮矩阵。
+
+![NULL](picture_20.jpg)
+
+键盘部件由主体（`LV_PART_MAIN`），按钮（`LV_PART_ITEMS`）构成。
+
+### 键盘部件的创建
+
+```c
+/**
+  *	@brief	键盘部件部件创建函数
+  */
+lv_obj_t * lv_keyboard_create(lv_obj_t * parent);
+```
+
+### 键盘部件样式设置函数
+
+```c
+/**
+  *	@brief 	键盘 文本框设置函数
+  * @param	obj			对象指针
+  * @param	txt			占位符文本
+  */
+void lv_keyboard_set_textarea(lv_obj_t * obj, lv_obj_t * ta);
+
+/**
+  *	@brief 	按键弹窗使能函数
+  * @param	obj			对象指针
+  * @param	en			使能案件弹窗
+  */
+void lv_keyboard_set_popovers(lv_obj_t * obj, bool en);
+
+/**
+  *	@brief 	键盘模式函数
+  * @param	obj			对象指针
+  * @param	mode		键盘模式
+  */
+void lv_keyboard_set_mode(lv_obj_t * obj, lv_keyboard_mode_t mode);
+
+enum _lv_keyboard_mode_t {
+    LV_KEYBOARD_MODE_TEXT_LOWER,
+    LV_KEYBOARD_MODE_TEXT_UPPER,
+    LV_KEYBOARD_MODE_SPECIAL,
+    LV_KEYBOARD_MODE_NUMBER,
+    LV_KEYBOARD_MODE_USER_1,
+    LV_KEYBOARD_MODE_USER_2,
+    LV_KEYBOARD_MODE_USER_3,
+    LV_KEYBOARD_MODE_USER_4,
+#if LV_USE_ARABIC_PERSIAN_CHARS == 1
+    LV_KEYBOARD_MODE_TEXT_ARABIC
+#endif
+};
+```
+
+## 19. 图片按钮部件（`lv_imgbtn`）
+
+图片按钮部件类似于按钮部件，不同的是，用户可以在其中设置图片。
+
+![NULL](picture_21.jpg)
+
+### 图片按钮部件的创建
+
+```c
+/**
+  *	@brief	键盘部件创建函数
+  */
+lv_obj_t * lv_imgbtn_create(lv_obj_t * parent);
+```
+
+### 图片按钮部件的样式设置
+
+![NULL](picture_22.jpg)
+
+```C
+/**
+  *	@brief	图片源设置
+  * @param	obj			对象指针
+  * @param	state		按钮状态
+  * @param	src_left	左图片源
+  * @param	src_mid		中图片源
+  * @param	src_right	右图片源
+  */
+void lv_imgbtn_set_src(lv_obj_t * obj, lv_imgbtn_state_t state, const void * src_left, const void * src_mid,const void * src_right);
+```
+
+## 20. 选项卡部件（`lv_tabview`）
+
+选项卡部件可以实现多页面切换，用户可以在不同的页面中添加内容。
+
+![NULL](picture_23.jpg)
+
+### 选项卡部件的创建
+
+```c
+/**
+  *	@brief	选项卡部件创建函数
+  * @param	tab_pos		选项卡位置，LV_DIR_...
+  * @param	tab_size	选项卡高度
+  */
+lv_obj_t * lv_tabview_create(lv_obj_t * parent, lv_dir_t tab_pos, lv_coord_t tab_size);
+```
+
+### 选项卡部件样式设置
+
+```c
+/**
+  *	@brief	设置当前选中的选项卡
+  * @param	obj			对象指针
+  * @param	id			选项卡id
+  * @param	anim_en		动画使能
+  */
+void lv_tabview_set_act(lv_obj_t * obj, uint32_t id, lv_anim_enable_t anim_en);
+
+/**
+  *	@brief	选项卡添加函数
+  * @param	obj			对象指针
+  * @param	name		选项卡名
+  */
+lv_obj_t * lv_tabview_add_tab(lv_obj_t * obj, const char * name);
+```
+
+## 21. 平铺视图部件（`lv_tileview`）
+
+平铺视图部件可以实现不同方向的页面切换，用户可以页面中添加内容。
+
+![NULL](picture_24.jpg)
+
+### 平铺视图部件的创建
+
+```c
+/**
+  *	@brief	平铺视图部件创建函数
+  */
+lv_obj_t * lv_tileview_create(lv_obj_t * parent);
+```
+
+### 平铺视图部件的样式设置
+
+```c
+/**
+  *	@brief	页面添加函数
+  * @param	tv				对象指针
+  * @param	col_id/row_id	 行列id
+  * @param	dir				方向
+  */
+lv_obj_t * lv_tileview_add_tile(lv_obj_t * tv, uint8_t col_id, uint8_t row_id, lv_dir_t dir);
+
+/**
+  *	@brief	设置当前显示页面
+  * @param	obj			对象指针
+  * @param	id/tile_obj	 页面id/页面对象
+  * @param	anim_en		动画使能
+  */
+void lv_obj_set_tile(lv_obj_t * obj, lv_obj_t * tile_obj, lv_anim_enable_t anim_en);
+```
+
+## 22. 窗口部件（`lv_win`）
+
+窗口部件可以作为一个容器，展现不同功能的页面。
+
+![NULL](picture_25.jpg)
+
+窗口部件由头部（`header`）和主体（`content`）构成。
+
+### 窗口部件的创建
+
+```c
+/**
+  *	@brief	窗口部件创建函数
+  */
+lv_obj_t * lv_win_create(lv_obj_t * parent);
+```
+
+### 窗口部件的样式设置
+
+```c
+/**
+  *	@brief	标题设置
+  * @param	win			对象指针
+  * @param	txt			标题文本	
+  */
+lv_obj_t * lv_win_add_title(lv_obj_t * win, const char * txt);
+
+/**
+  *	@brief	头部按键设置
+  * @param	win			对象指针
+  * @param	icon		按键标识
+  * @param	btn_w		按键宽度
+  */
+lv_obj_t * lv_win_add_button(lv_obj_t * win, const void * icon, lv_coord_t btn_w);
+
+/**
+  *	@brief	主体获取函数
+  * @param	win			对象指针
+  * @retval	窗口主体指针
+  */
+lv_obj_t * lv_win_get_content(lv_obj_t * win);
+```
+
+## 23. 消息框部件（`lv_msgbox`）
+
+消息框部件可以实现弹窗提示，常用于消息通知、确定操作等。
+
+![NULL](picture_26.jpg)
+
+消息框部件由标题（`title`）和主体（`obj`），关闭按钮（`close_btn`），内容（`content`），按钮矩阵（`btnmatrix`）构成。
+
+### 消息框部件的创建
+
+```c
+// 创建按钮矩阵
+static const char *btns[] = {"Continue", "Close", ""}; // 最后一项为空
+
+/**
+  *	@brief	消息框部件创建函数
+  * @param	title			标题文本
+  * @param	txt				主题文本
+  * @param	btn_txts		 按钮矩阵文本
+  * @param	add_close_btn	 是否使用关闭按钮
+  */
+lv_obj_t * lv_msgbox_create(lv_obj_t * parent, const char * title, const char * txt, const char * btn_txts[],bool add_close_btn);
+```
+
+### 消息框部件的状态获取
+
+```c
+lv_obj_t *target = lv_event_get_current_target(e);	  // 获取当前触发源 
+lv_msgbox_get_active_btn(target);					// 获取按钮索引 
+lv_msgbox_get_active_btn_text(target);				// 获取按钮文本 
+```
+
+## 24. 微调器部件（`lv_spinbox`）
+
+微调器部件本质上就是一个数字文本，常用于精确调节某个参数的值。
+
+![NULL](picture_27.jpg)
+
+微调器部件由主体（`LV_PART_MAIN`），光标（`LV_PART_CURSOR`）构成。
+
+### 微调器部件的创建
+
+```c
+/**
+  *	@brief	微调器部件创建函数
+  */
+lv_obj_t * lv_spinbox_create(lv_obj_t * parent);
+```
+
+### 微调器部件的样式设置
+
+```c
+/**
+ * @brief	设置微调器步进值
+ * @param 	spinbox  	对象指针
+ * @param 	step 		步进值
+ */
+void lv_spinbox_set_step(lv_obj_t * obj, uint32_t step);
+
+/**
+ * @brief	设置微调器范围
+ * @param 	spinbox  	对象指针
+ * @param 	range_min 	最小值
+ * @param 	range_max 	最大值
+ */
+void lv_spinbox_set_range(lv_obj_t * obj, int32_t range_min, int32_t range_max);
+    
+/**
+ * @brief	设置光标位置
+ * @param 	spinbox  	对象指针
+ * @param 	pos 		光标位置，从末端开始计数
+ */
+void lv_spinbox_set_cursor_pos(lv_obj_t * obj, uint32_t pos);
+
+/**
+ * @brief	设置当前值
+ * @param 	obj 	对象指针
+ * @param 	i  		当前值
+ */
+void lv_spinbox_set_value(lv_obj_t * obj, int32_t i);
+
+/**
+ * @brief	设置数字位数和小数点值
+ * @param 	spinbox 			对象指针
+ * @param 	digit_count 		数字位数
+ * @param 	separator_position 	小数点位置
+ */
+void lv_spinbox_set_digit_format(lv_obj_t * obj, uint32_t digit_count, uint32_t separator_position);
+
+
+/**
+ * @brief	获取整数值
+ * @param 	obj 	对象指针
+ * @return 	整数的微调器值
+ */
+int32_t lv_spinbox_get_value(lv_obj_t * obj);
+
+/**
+ * @brief	递增和递减微调器
+ */
+void lv_spinbox_increment(lv_obj_t * obj);
+void lv_spinbox_decrement(lv_obj_t * obj);
+```
+
+## 25. 表格部件（`lv_table`）
+
+表格部件由一个个单元格组成，它的单元格中只能存放文本形式的内容。
+
+![NULL](picture_28.jpg)
+
+表格部件由主体（`LV_PART_MAIN`），单元格（`LV_PART_ITEMS`）构成。
+
+### 表格部件的创建
+
+```c
+/**
+  *	@brief	微调器部件创建函数
+  */
+lv_obj_t * lv_table_create(lv_obj_t * parent);
+```
+
+### 表格部件的样式设置
+
+```c
+/**
+ * @brief	行数列数设置函数
+ * @param 	obj 				对象指针
+ * @param	row_cnt/col_cnt		 行数/列数
+ */
+void lv_table_set_row_cnt(lv_obj_t * obj, uint32_t row_cnt);
+void lv_table_set_col_cnt(lv_obj_t * obj, uint32_t col_cnt);
+
+/**
+ * @brief	列宽设置函数
+ * @param 	obj 				对象指针
+ * @param	col_id				列的id
+ * @param	w					列宽度
+ */
+void lv_table_set_col_width(lv_obj_t * obj, uint32_t col_id, lv_coord_t w);
+
+/**
+ * @brief	列宽设置函数
+ * @param 	obj 				对象指针
+ * @param	row					行
+ * @param	col					列
+ * @param	txt					文本
+ */
+void lv_table_set_cell_value(lv_obj_t * obj, uint32_t row, uint32_t col, const char * txt);
 ```
 
